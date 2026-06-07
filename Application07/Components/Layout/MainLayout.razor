@@ -1,0 +1,42 @@
+﻿@inherits LayoutComponentBase
+@rendermode InteractiveServer
+
+<div class="page" style="background-color: @(isDarkMode ? "#121212" : "#f8f9fa"); color: @(isDarkMode ? "#ffffff" : "#212529"); min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; display: flex;">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main style="flex: 1; display: flex; flex-direction: column;">
+        <div class="top-row px-4 d-flex justify-content-between align-items-center" style="background-color: @(isDarkMode ? "#1e1e1e" : "#ffffff"); border-bottom: 1px solid @(isDarkMode ? "#333333" : "#e9ecef"); color: @(isDarkMode ? "#ffffff" : "#212529"); width: 100%;">
+            <span class="text-muted small fw-semibold">Workspace Shell Architecture Engine</span>
+
+            <button class="btn btn-sm fw-bold px-3 rounded-pill shadow-sm @(isDarkMode ? "btn-light text-dark" : "btn-dark text-white")"
+                    @onclick="ToggleTheme">
+                @(isDarkMode ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode")
+            </button>
+        </div>
+
+        <article class="content px-4 py-4" style="background-color: @(isDarkMode ? "#121212" : "#f8f9fa"); flex: 1;">
+            <div class="container">
+                <div class="card col-md-8 mx-auto shadow-sm p-4 mb-3"
+                     style="background-color: @(isDarkMode ? "#1e1e1e" : "#ffffff"); color: @(isDarkMode ? "#ffffff" : "#212529"); border: 1px solid @(isDarkMode ? "#444444" : "#0d6efd"); transition: all 0.3s ease;">
+                    <h3 class="fw-bold mb-1 @(isDarkMode ? "text-info" : "text-primary")">Application 7: Theme Controller</h3>
+                    <p class="text-muted small mb-0">
+                        Tracks, writes, and synchronizes user preferences using native Blazor framework memory state channels.
+                    </p>
+                </div>
+
+                @Body
+            </div>
+        </article>
+    </main>
+</div>
+
+@code {
+    private bool isDarkMode = false;
+
+    private void ToggleTheme()
+    {
+        isDarkMode = !isDarkMode;
+    }
+}
